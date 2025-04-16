@@ -10,17 +10,17 @@
       <div class="flex items-center justify-between mb-6">
 
           <!-- Tambah Penjualan -->
+          @if (Auth::user()->role === 'kasir')
           <a href="{{ route('sales.create') }}"
               class="px-4 py-2 text-white transition duration-200 bg-blue-500 rounded-lg hover:bg-blue-600">
               Tambah Penjualan
           </a>
+          @endif
 
                   <!-- Export Excel -->
-                  <form action="" method="POST" class="inline">
-                      <button type="submit" class="px-4 py-2 text-white transition duration-200 bg-green-500 rounded-lg hover:bg-green-600">
-                          Export Excel
-                      </button>
-                  </form>
+                  <a href="{{ route('sales.export') }}" class="px-4 py-2 text-white transition duration-200 bg-green-500 rounded-lg hover:bg-green-600">
+                    Export Excel
+                </a>
       </div>
 
       <!-- Search Bar -->
@@ -49,17 +49,18 @@
                   </tr>
               </thead>
               <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                @foreach ($sales as $sale)
                       <tr class="transition duration-200 hover:bg-gray-50 dark:hover:bg-gray-700">
-                          <td class="px-6 py-4 text-gray-900 dark:text-gray-100">1</td>
+                          <td class="px-6 py-4 text-gray-900 dark:text-gray-100">{{ $sale->id }}</td>
                           <td class="px-6 py-4 text-gray-900 dark:text-gray-100">
-                              Rudy/Non-member
+                              {{ $sale->member ? $sale->member->name : ($sale->customer_name ?? 'Non-Member') }}
                           </td>
-                          <td class="px-6 py-4 text-gray-900 dark:text-gray-100">2025-01-01</td>
-                          <td class="px-6 py-4 text-gray-900 dark:text-gray-100">Rp 1000</td>
-                          <td class="px-6 py-4 text-gray-900 dark:text-gray-100">Fathir</td>
+                          <td class="px-6 py-4 text-gray-900 dark:text-gray-100">{{$sale->created_at->format('Y-m-d')}}</td>
+                          <td class="px-6 py-4 text-gray-900 dark:text-gray-100">Rp {{ number_format($sale->total_price, 0, ',', '.') }}</td>
+                          <td class="px-6 py-4 text-gray-900 dark:text-gray-100">{{  $sale->user->name }}</td>
                           <td class="px-6 py-4">
                               <div class="flex items-center space-x-2">
-                                  <a href=""
+                                  <a href="{{ route('sales.result', $sale->id) }}') }}"
                                      class="text-blue-500 transition duration-200 hover:text-blue-700 dark:hover:text-blue-400">
                                       Lihat
                                   </a>
@@ -75,13 +76,14 @@
                               </div>
                           </td>
                       </tr>
+                  @endforeach
               </tbody>
           </table>
       </div>
 
       <!-- Pagination -->
       <div class="pt-6">
-
+        {{ $sales->links() }}
       </div>
   </div>
 </x-app-layout>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Exports\UsersExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -77,4 +79,10 @@ public function destroy($id)
     return redirect()->route('users.index')->with('success', 'Pengguna berhasil dihapus.');
 
 }
+
+public function export()
+{
+    return Excel::download(new UsersExport, 'daftar-pengguna.xlsx');
+}
+
 }

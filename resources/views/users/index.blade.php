@@ -15,7 +15,7 @@
           </a>
       </div>
       <div class="mt-6">
-          <a href="" class="px-4 py-2 text-white transition duration-200 bg-green-500 rounded-lg hover:bg-green-600">
+          <a href="{{ route('users.export') }}" class="px-4 py-2 text-white transition duration-200 bg-green-500 rounded-lg hover:bg-green-600">
               Export Excel
           </a>
       </div>
