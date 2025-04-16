@@ -17,6 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/export', [ProductController::class, 'export'])->name('products.export');
     Route::get('/sales', [SaleController::class, 'index'])->name('sales.index');
+    Route::get('/sales/export', [SaleController::class, 'export'])->name('sales.export');
     Route::get('/sales/result/{sale}', [SaleController::class, 'result'])->name('sales.result');
     Route::get('/sales/{id}/pdf', [SaleController::class, 'downloadPdf'])->name('sales.pdf');
 
@@ -25,7 +26,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/sales/create', [SaleController::class, 'create'])->name('sales.create');
         Route::post('/sales/checkout', [SaleController::class, 'checkout'])->name('sales.checkout');
         Route::get('/sales/member', [SaleController::class, 'member'])->name('sales.member');
-        Route::get('/sales/export', [SaleController::class, 'export'])->name('sales.export');
 
      });
 
