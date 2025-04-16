@@ -6,23 +6,32 @@
     </x-slot>
 
     <div class="container px-4 py-6 mx-auto">
-     @if (Auth::user()->role === 'admin')
-      <div class="p-6 mb-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
-       <div class="flex items-center justify-between">
-        <h3 class="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">Penjualan Harian</h3>
-        <h3 class="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">Persentase Penjualan Produk</h3>
-       </div>
-       <div class="flex justify-between">
-        <div class="chart-container" style="position: relative; height: 48vh; width: 100%">
-         <canvas id="dailySalesChart"></canvas>
-        </div>
-        <div class="chart-container" style="position: relative; height: 48vh; width: 100%">
-         <canvas id="productSalesChart"></canvas>
+              <!-- Card Selamat Datang -->
+      <div class="mb-6">
+        <div class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
+         <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100">
+          Halo, {{ Auth::user()->name ?? 'Pengguna' }}!
+         </h3>
+         <p class="mt-2 text-gray-600 dark:text-gray-300">
+          Selamat datang di dashboard penjualan
+         </p>
         </div>
        </div>
+        <div class="p-6 mb-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
+         <div class="flex items-center justify-between">
+          <h3 class="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">Penjualan Harian</h3>
+          <h3 class="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">Persentase Penjualan Produk</h3>
+         </div>
+         <div class="flex justify-between">
+          <div class="chart-container" style="position: relative; height: 48vh; width: 100%">
+           <canvas id="dailySalesChart"></canvas>
+          </div>
+          <div class="chart-container" style="position: relative; height: 48vh; width: 100%">
+           <canvas id="productSalesChart"></canvas>
+          </div>
+         </div>
 
-       <!-- Doughnut Chart: Persentase Penjualan Produk -->
-      </div>
+        </div>
 
       <!-- Chart.js Script -->
       @push('scripts')
@@ -106,18 +115,7 @@
         });
        </script>
       @endpush
-     @else
-      <!-- Card Selamat Datang -->
-      <div class="mb-6">
-       <div class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100">
-         Halo, {{ Auth::user()->name ?? 'Pengguna' }}!
-        </h3>
-        <p class="mt-2 text-gray-600 dark:text-gray-300">
-         Selamat datang di dashboard penjualan
-        </p>
-       </div>
-      </div>
+
 
       <!-- Card Jumlah Transaksi Hari Ini -->
       <div class="mb-6">
@@ -132,7 +130,7 @@
           </p>
          </div>
          <div class="text-sm text-gray-500 dark:text-gray-400">
-          Diperbarui: {{ $lastSale ? $lastSale->created_at->format('d M Y, H:i') : 'Belum ada transaksi' }}
+          Diperbarui: {{ $lastSale ? $lastSale->created_at->format('d M Y') : 'Belum ada transaksi' }}
          </div>
         </div>
        </div>
@@ -191,6 +189,5 @@
         @endif
        </div>
       </div>
-     @endif
     </div>
    </x-app-layout>
