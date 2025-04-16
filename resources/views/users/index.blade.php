@@ -33,15 +33,16 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                @foreach ($users as $user)
                 <tr class="transition duration-200 hover:bg-gray-50 dark:hover:bg-gray-700">
                     <!-- No -->
-                    <td class="px-6 py-4 text-gray-900 dark:text-gray-100">1</td>
+                    <td class="px-6 py-4 text-gray-900 dark:text-gray-100">{{ $loop->iteration }}</td>
                     <!-- Nama -->
-                    <td class="px-6 py-4 text-gray-900 dark:text-gray-100">Fathir</td>
+                    <td class="px-6 py-4 text-gray-900 dark:text-gray-100">{{ $user->name }}</td>
                     <!-- Email -->
-                    <td class="px-6 py-4 text-gray-900 dark:text-gray-100">fathir@gmail.com</td>
+                    <td class="px-6 py-4 text-gray-900 dark:text-gray-100">{{ $user->email }}</td>
                     <!-- Role -->
-                    <td class="px-6 py-4 text-gray-900 dark:text-gray-100">Kasir</td>
+                    <td class="px-6 py-4 text-gray-900 dark:text-gray-100">{{ ucfirst($user->role) }}</td>
                     <!-- Aksi -->
                     <td class="px-6 py-4">
                         <a href="{{ route('users.edit', $user->id) }}" class="gap-0 text-blue-500 hover:text-blue-700">
@@ -50,12 +51,15 @@
                         <span class="text-gray-400">|</span>
 
                         <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
                             <button type="submit" class="text-red-500 hover:text-red-700" onclick="return confirm('Apakah Anda yakin ingin menghapus user ini?')">
                                 Hapus
                             </button>
                         </form>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

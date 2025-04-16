@@ -10,7 +10,7 @@
       <div class="flex items-center justify-between mb-6">
 
           <!-- Tambah Penjualan -->
-          <a href=""
+          <a href="{{ route('sales.create') }}"
               class="px-4 py-2 text-white transition duration-200 bg-blue-500 rounded-lg hover:bg-blue-600">
               Tambah Penjualan
           </a>
@@ -59,12 +59,12 @@
                           <td class="px-6 py-4 text-gray-900 dark:text-gray-100">Fathir</td>
                           <td class="px-6 py-4">
                               <div class="flex items-center space-x-2">
-                                  <a href="" 
+                                  <a href=""
                                      class="text-blue-500 transition duration-200 hover:text-blue-700 dark:hover:text-blue-400">
                                       Lihat
                                   </a>
                                   <span class="text-gray-400">|</span>
-                                  <a href="" 
+                                  <a href=""
                                      class="text-red-500 transition duration-200 hover:text-red-700 dark:hover:text-red-400"
                                      title="Cetak PDF">
                                       <svg class="inline w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,7 +81,7 @@
 
       <!-- Pagination -->
       <div class="pt-6">
-        
+
       </div>
   </div>
 </x-app-layout>

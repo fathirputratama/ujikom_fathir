@@ -10,7 +10,8 @@ class ProductController extends Controller
 {
     //
     public function index(){
-        return view('products.index');
+        $products = Product::all();
+        return view('products.index', compact('products'));
     }
 
     public function create(){
@@ -26,15 +27,13 @@ class ProductController extends Controller
 
         ]);
 
-        $image = $request->file('image');
-        $imagePath = $image->store('public/images');
-        $imageName = basename($imagePath);
+        $imagePath = $request->file('image')->store('products', 'public');
 
         $product = Product::create([
             'name' => $request->name,
             'price' => $request->price,
             'stock' => $request->stock,
-            'image' => $imageName
+            'image' => $imagePath
         ]);
 
         return redirect()->route('products.index')->with('success', 'Produk berhasil ditambahkan.');

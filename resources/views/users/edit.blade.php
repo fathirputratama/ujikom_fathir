@@ -6,15 +6,17 @@
   </x-slot>
 
   <div class="container p-6 mx-auto">
-  <form action="" method="POST" enctype="multipart/form-data" class="max-w-2xl mx-auto">
+  <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data" class="max-w-2xl mx-auto">
+      @csrf
+      @method('PUT')
       <div class="grid grid-cols-1 gap-6 mb-6 md:grid-cols-2">
           <div>
               <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nama</label>
-              <input type="text" name="name" value="" class="w-full px-4 py-2 border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:ring-2 focus:ring-blue-500" required>
+              <input type="text" name="name" value="{{ $user->name }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:ring-2 focus:ring-blue-500" required>
           </div>
           <div>
               <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-              <input type="email" name="email" id="email" value="" class="w-full px-4 py-2 border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:ring-2 focus:ring-blue-500" required>
+              <input type="email" name="email" id="email" value="{{ $user->email }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:ring-2 focus:ring-blue-500" required>
           </div>
       </div>
 
@@ -26,8 +28,8 @@
           <div>
               <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Role</label>
               <select name="role" id="role" class="w-full px-4 py-2 border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:ring-2 focus:ring-blue-500" required>
-                <option value="admin">Admin</option>
-                <option value="kasir">Kasir</option>
+                <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
+                <option value="kasir" {{ $user->role === 'kasir' ? 'selected' : '' }}>Kasir</option>
               </select>
           </div>
       </div>

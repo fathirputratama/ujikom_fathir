@@ -6,8 +6,9 @@
   </x-slot>
 
   <div class="container p-6 mx-auto">
-    <form action="" method="POST" enctype="multipart/form-data" class="max-w-2xl mx-auto">
-        <!-- Card Container -->
+    <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data" class="max-w-2xl mx-auto">
+        @csrf
+        @method('PUT')
         <div class="overflow-hidden transition-all duration-300 bg-white shadow-xl dark:bg-gray-800 rounded-2xl hover:shadow-2xl">
             <!-- Body -->
             <div class="p-6 space-y-4">
@@ -27,7 +28,7 @@
                         <!-- Preview Image -->
                         <div id="image-preview" class="w-24 h-24 mx-auto overflow-hidden border-2 border-white rounded-full shadow-lg">
                          {{--ii.ff  --}}
-                                <img src="" alt="Preview" class="object-cover w-full h-full">
+                                <img src="{{ asset('storage/' . $product->image) }}" alt="Preview" class="object-cover w-full h-full">
                             {{-- ee.ll.ss.ee --}}
                                 <div class="flex items-center justify-center w-full h-full bg-gray-100 dark:bg-gray-700">
                                     <svg class="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -65,8 +66,8 @@
                             type="text"
                             name="name"
                             id="name"
-                            value=""
-                            class="w-full px-4 py-2 placeholder-transparent bg-transparent border-0 border-b-2 border-gray-300 peer dark:border-gray-600 focus:ring-0 focus:border-blue-500 dark:focus:border-blue-400"
+                            value="{{ $product->name }}"
+                            class="text-white w-full px-4 py-2 placeholder-transparent bg-transparent border-0 border-b-2 border-gray-300 peer dark:border-gray-600 focus:ring-0 focus:border-blue-500 dark:focus:border-blue-400"
                             placeholder=" "
                         />
                         <label
@@ -86,8 +87,8 @@
                             type="number"
                             name="price"
                             id="price"
-                            value=""
-                            class="w-full px-4 py-2 pl-10 placeholder-transparent bg-transparent border-0 border-b-2 border-gray-300 peer dark:border-gray-600 focus:ring-0 focus:border-blue-500 dark:focus:border-blue-400"
+                            value="{{ $product->price }}"
+                            class="text-white w-full px-4 py-2 pl-10 placeholder-transparent bg-transparent border-0 border-b-2 border-gray-300 peer dark:border-gray-600 focus:ring-0 focus:border-blue-500 dark:focus:border-blue-400"
                             placeholder=" "
                         />
                         <label
@@ -104,8 +105,8 @@
                             type="number"
                             name="stock"
                             id="stock"
-                            value=""
-                            class="w-full px-4 py-2 placeholder-transparent bg-transparent border-0 border-b-2 border-gray-300 peer dark:border-gray-600 focus:ring-0 focus:border-blue-500 dark:focus:border-blue-400"
+                            value="{{ $product->stock }}"
+                            class="text-white w-full px-4 py-2 placeholder-transparent bg-transparent border-0 border-b-2 border-gray-300 peer dark:border-gray-600 focus:ring-0 focus:border-blue-500 dark:focus:border-blue-400"
                             placeholder=" "
                         />
                         <label

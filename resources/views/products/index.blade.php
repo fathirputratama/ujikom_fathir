@@ -35,21 +35,29 @@
                 </tr>
             </thead>
             <tbody>
-                    <tr class="transition duration-200">
-                        <td class="px-6 py-4 text-gray-900 dark:text-gray-100">1</td>
-                        <td class="px-6 py-2 text-gray-900 dark:text-gray-100">makanan</td>
-                        <td class="px-6 py-2 text-gray-900 dark:text-gray-100">Rp. 1000</td>
-                        <td class="px-6 py-2 text-gray-900 dark:text-gray-100">999</td>
-                        <td class="px-6 py-2">
-                          <img src="" alt="Preview" class="object-cover w-full h-full">
-                        </td>
-                        <td class="px-4 py-2">
-                            <a href="" class="text-blue-500 transition duration-200 hover:text-blue-700 dark:hover:text-blue-400">Edit</a>
-                            <form action="" method="POST" class="inline">
-                                <button type="submit" class="ml-2 text-red-500 transition duration-200 hover:text-red-700 dark:hover:text-red-400" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">Hapus</button>
+                @foreach ($products as $product)
+                <tr class="transition duration-200">
+                    <td class="px-6 py-4 text-gray-900 dark:text-gray-100">{{ $loop->iteration }}</td>
+                    <td class="px-6 py-2 text-gray-900 dark:text-gray-100">{{ $product->name }}</td>
+                    <td class="px-6 py-2 text-gray-900 dark:text-gray-100">Rp. {{ number_format($product->price, 0, ',', '.') }}</td>
+                    <td class="px-6 py-2 text-gray-900 dark:text-gray-100">{{ $product->stock }}</td>
+                    <td class="px-6 py-2">
+                         @if ($product->image)
+                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="object-cover w-16 h-16 rounded-lg">
+                         @else
+                          <span class="text-gray-500 dark:text-gray-400">Tidak ada gambar</span>
+                         @endif
+                    </td>
+                    <td class="px-4 py-2">
+                        <a href="{{ route('products.edit', $product->id) }}" class="text-blue-500 transition duration-200 hover:text-blue-700 dark:hover:text-blue-400">Edit</a>
+                        <form action="{{ route('products.destroy', $product) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="ml-2 text-red-500 transition duration-200 hover:text-red-700 dark:hover:text-red-400" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">Hapus</button>
                         </form>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
