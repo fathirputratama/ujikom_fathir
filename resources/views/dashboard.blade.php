@@ -130,7 +130,7 @@
           </p>
          </div>
          <div class="text-sm text-gray-500 dark:text-gray-400">
-          Diperbarui: {{ $lastSale ? $lastSale->created_at->format('d M Y') : 'Belum ada transaksi' }}
+          Diperbarui: {{ $lastSale ? $lastSale->created_at->format('d M Y, H:i') : 'Belum ada transaksi' }}
          </div>
         </div>
        </div>
@@ -159,9 +159,15 @@
       <!-- Daftar Produk Tersedia -->
       <div class="bg-white rounded-lg shadow-md dark:bg-gray-800">
        <div class="p-6">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-         Produk Tersedia
-        </h3>
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+            Produk Tersedia
+          </h3>
+          <a href="{{ route('sales.create') }}"
+          class="mt-3 inline-block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200">
+         Buat Transaksi
+        </a>
+        </div>
         @if ($products->isEmpty())
          <p class="text-gray-600 dark:text-gray-300">
           Tidak ada produk tersedia saat ini.
@@ -179,10 +185,6 @@
             <p class="text-gray-600 dark:text-gray-300">
              Stok: {{ $product->stock }}
             </p>
-            <a href="{{ route('sales.create') }}"
-              class="mt-3 inline-block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200">
-             Buat Transaksi
-            </a>
            </div>
           @endforeach
          </div>

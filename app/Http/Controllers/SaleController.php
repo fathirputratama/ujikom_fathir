@@ -20,10 +20,10 @@ class SaleController extends Controller
     public function index(Request $request)
     {
         $query = Sale::with(['member', 'user']);
-
+    
         if ($request->filled('search')) {
             $search = $request->search;
-
+    
             $query->where(function ($q) use ($search) {
                 $q->whereHas('member', function ($q2) use ($search) {
                     $q2->where('name', 'ilike', "%{$search}%"); // gunakan ilike untuk case-insensitive di PostgreSQL
@@ -36,12 +36,11 @@ class SaleController extends Controller
                 ->orWhereRaw("CAST(total_price AS TEXT) LIKE ?", ["%{$search}%"]);
             });
         }
-
+    
         $sales = $query->latest()->paginate(10)->withQueryString();
-
+    
         return view('sales.index', compact('sales'));
     }
-
 
     public function create(Request $request)
     {
